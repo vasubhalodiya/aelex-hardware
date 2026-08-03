@@ -1,6 +1,6 @@
 /* ==========================================================================
    AELEX™ - Modern Architectural Hardware & Precision Fittings
-   Master JavaScript File - Interactivity & Tech Specs Database
+   Master JavaScript File - Responsive Interactivity & Tech Specs Database
    ========================================================================== */
 
 // --------------------------------------------------------------------------
@@ -118,7 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initPortfolioFilters();
     initSearch();
     initDrawer();
-    initScrollHeader();
+    initResponsiveHeader();
 });
 
 // --------------------------------------------------------------------------
@@ -127,23 +127,24 @@ document.addEventListener('DOMContentLoaded', () => {
 function initLoader() {
     const loader = document.getElementById('preloader');
     const fill = document.getElementById('loader-bar');
-    
+    if (!loader || !fill) return;
+
     let progress = 0;
     const timer = setInterval(() => {
-        progress += Math.floor(Math.random() * 20) + 10;
+        progress += Math.floor(Math.random() * 20) + 12;
         if (progress >= 100) {
             progress = 100;
             clearInterval(timer);
             setTimeout(() => {
                 loader.classList.add('hidden');
-            }, 300);
+            }, 250);
         }
         fill.style.width = progress + '%';
-    }, 40);
+    }, 35);
 }
 
 // --------------------------------------------------------------------------
-// 4. Subtle Cursor Follower
+// 4. Subtle Cursor Follower (Fine Pointer Devices Only)
 // --------------------------------------------------------------------------
 function initCursor() {
     const dot = document.getElementById('cursor-dot');
@@ -197,10 +198,10 @@ function initSwatches() {
             const name = card.dataset.name;
             const desc = card.dataset.desc;
 
-            finishTitle.textContent = name;
-            finishDesc.textContent = desc;
+            if (finishTitle) finishTitle.textContent = name;
+            if (finishDesc) finishDesc.textContent = desc;
 
-            if (filtersMap[key]) {
+            if (finishImg && filtersMap[key]) {
                 finishImg.style.filter = filtersMap[key];
             }
         });
@@ -257,8 +258,8 @@ function openTechSpecsModal(specKey) {
     const data = techSpecsDB[specKey];
     if (!data) return;
 
-    title.textContent = data.title;
-    badge.textContent = data.badge;
+    if (title) title.textContent = data.title;
+    if (badge) badge.textContent = data.badge;
 
     let html = `
         <table class="clean-table">
@@ -273,12 +274,15 @@ function openTechSpecsModal(specKey) {
         </table>
     `;
 
-    body.innerHTML = html;
-    modal.classList.add('open');
+    if (body) body.innerHTML = html;
+    if (modal) modal.classList.add('open');
+    document.body.classList.add('no-scroll');
 }
 
 function closeTechSpecsModal() {
-    document.getElementById('specs-modal').classList.remove('open');
+    const modal = document.getElementById('specs-modal');
+    if (modal) modal.classList.remove('open');
+    document.body.classList.remove('no-scroll');
 }
 
 // --------------------------------------------------------------------------
@@ -291,38 +295,59 @@ function initSearch() {
     const input = document.getElementById('search-input');
     const container = document.getElementById('search-results');
 
-    btn.addEventListener('click', () => modal.classList.add('open'));
-    close.addEventListener('click', () => modal.classList.remove('open'));
+    if (!btn || !modal) return;
 
-    input.addEventListener('input', (e) => {
-        const query = e.target.value.toLowerCase().trim();
-        if (!query) {
-            container.innerHTML = '<p class="search-placeholder-msg">Type product code to view exact dimensions, box packing, and screw sizes.</p>';
-            return;
-        }
-
-        let matches = [];
-        Object.keys(techSpecsDB).forEach(key => {
-            const db = techSpecsDB[key];
-            db.rows.forEach(row => {
-                if (row[0].toLowerCase().includes(query) || row[1].toLowerCase().includes(query) || row[2].toLowerCase().includes(query)) {
-                    matches.push({ key, code: row[0], mm: row[1], inch: row[2] });
-                }
-            });
-        });
-
-        if (matches.length === 0) {
-            container.innerHTML = '<p class="search-placeholder-msg">No hardware codes matched. Try "BHB" or "BT".</p>';
-            return;
-        }
-
-        container.innerHTML = matches.map(m => `
-            <div class="search-result-row" onclick="openTechSpecsModal('${m.key}'); document.getElementById('search-modal').classList.remove('open');">
-                <div><strong>${m.code}</strong> - <span>${m.inch} (${m.mm})</span></div>
-                <span style="font-size: 0.8rem; color: var(--accent-gold); font-weight: 700;">View Spec &rarr;</span>
-            </div>
-        `).join('');
+    btn.addEventListener('click', () => {
+        modal.classList.add('open');
+        document.body.classList.add('no-scroll');
+        if (input) input.focus();
     });
+
+    if (close) {
+        close.addEventListener('click', () => {
+            modal.classList.remove('open');
+            document.body.classList.remove('no-scroll');
+        });
+    }
+
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            modal.classList.remove('open');
+            document.body.classList.remove('no-scroll');
+        }
+    });
+
+    if (input && container) {
+        input.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase().trim();
+            if (!query) {
+                container.innerHTML = '<p class="search-placeholder-msg">Type product code to view exact dimensions, box packing, and screw sizes.</p>';
+                return;
+            }
+
+            let matches = [];
+            Object.keys(techSpecsDB).forEach(key => {
+                const db = techSpecsDB[key];
+                db.rows.forEach(row => {
+                    if (row[0].toLowerCase().includes(query) || row[1].toLowerCase().includes(query) || row[2].toLowerCase().includes(query)) {
+                        matches.push({ key, code: row[0], mm: row[1], inch: row[2] });
+                    }
+                });
+            });
+
+            if (matches.length === 0) {
+                container.innerHTML = '<p class="search-placeholder-msg">No hardware codes matched. Try "BHB" or "BT".</p>';
+                return;
+            }
+
+            container.innerHTML = matches.map(m => `
+                <div class="search-result-row" onclick="openTechSpecsModal('${m.key}'); document.getElementById('search-modal').classList.remove('open'); document.body.classList.remove('no-scroll');">
+                    <div><strong>${m.code}</strong> - <span>${m.inch} (${m.mm})</span></div>
+                    <span style="font-size: 0.8rem; color: var(--accent-gold); font-weight: 700;">View Spec &rarr;</span>
+                </div>
+            `).join('');
+        });
+    }
 }
 
 // --------------------------------------------------------------------------
@@ -334,19 +359,29 @@ function initDrawer() {
     const overlay = document.getElementById('drawer-overlay');
     const closeBtn = document.getElementById('drawer-close');
 
-    openBtn.addEventListener('click', openInquiryDrawer);
-    closeBtn.addEventListener('click', closeInquiryDrawer);
-    overlay.addEventListener('click', closeInquiryDrawer);
+    if (openBtn) openBtn.addEventListener('click', openInquiryDrawer);
+    if (closeBtn) closeBtn.addEventListener('click', closeInquiryDrawer);
+    if (overlay) overlay.addEventListener('click', closeInquiryDrawer);
 }
 
 function openInquiryDrawer() {
-    document.getElementById('drawer-panel').classList.add('open');
-    document.getElementById('drawer-overlay').classList.add('open');
+    const panel = document.getElementById('drawer-panel');
+    const overlay = document.getElementById('drawer-overlay');
+    if (panel && overlay) {
+        panel.classList.add('open');
+        overlay.classList.add('open');
+        document.body.classList.add('no-scroll');
+    }
 }
 
 function closeInquiryDrawer() {
-    document.getElementById('drawer-panel').classList.remove('open');
-    document.getElementById('drawer-overlay').classList.remove('open');
+    const panel = document.getElementById('drawer-panel');
+    const overlay = document.getElementById('drawer-overlay');
+    if (panel && overlay) {
+        panel.classList.remove('open');
+        overlay.classList.remove('open');
+        document.body.classList.remove('no-scroll');
+    }
 }
 
 function sendWhatsAppInquiry() {
@@ -367,7 +402,9 @@ function submitContactForm(e) {
     const msg = document.getElementById('c-message').value;
 
     const feedback = document.getElementById('form-feedback');
-    feedback.innerHTML = `<span style="color: #059669; font-weight: 600;"><i class="fa-solid fa-check-circle"></i> Thank you ${name}! Inquiry submitted. We will call you at ${phone}.</span>`;
+    if (feedback) {
+        feedback.innerHTML = `<span style="color: #059669; font-weight: 600;"><i class="fa-solid fa-check-circle"></i> Thank you ${name}! Inquiry submitted. We will call you at ${phone}.</span>`;
+    }
 
     const text = `Hello AELEX Team! Form Inquiry:%0A- Name: ${name}%0A- Phone: ${phone}%0A- Product: ${cat}%0A- Requirement: ${msg}`;
     setTimeout(() => {
@@ -376,29 +413,44 @@ function submitContactForm(e) {
 }
 
 // --------------------------------------------------------------------------
-// 10. Scroll Header & Back To Top
+// 10. Pixel-Perfect Responsive Header & Mobile Menu
 // --------------------------------------------------------------------------
-function initScrollHeader() {
+function initResponsiveHeader() {
     const header = document.getElementById('site-header');
     const topScroll = document.getElementById('top-scroll');
     const menuToggle = document.getElementById('menu-toggle');
     const primaryNav = document.getElementById('primary-nav');
+    const navItems = document.querySelectorAll('.nav-item');
 
     window.addEventListener('scroll', () => {
-        if (window.scrollY > 60) {
-            header.classList.add('scrolled');
-            topScroll.classList.add('visible');
+        if (window.scrollY > 40) {
+            if (header) header.classList.add('scrolled');
+            if (topScroll) topScroll.classList.add('visible');
         } else {
-            header.classList.remove('scrolled');
-            topScroll.classList.remove('visible');
+            if (header) header.classList.remove('scrolled');
+            if (topScroll) topScroll.classList.remove('visible');
         }
     });
 
-    topScroll.addEventListener('click', () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
+    if (topScroll) {
+        topScroll.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
 
-    menuToggle.addEventListener('click', () => {
-        primaryNav.classList.toggle('open');
-    });
+    if (menuToggle && primaryNav) {
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            primaryNav.classList.toggle('open');
+            document.body.classList.toggle('no-scroll');
+        });
+
+        navItems.forEach(item => {
+            item.addEventListener('click', () => {
+                menuToggle.classList.remove('active');
+                primaryNav.classList.remove('open');
+                document.body.classList.remove('no-scroll');
+            });
+        });
+    }
 }
