@@ -21,10 +21,6 @@
 </head>
 <body class="light-theme">
 
-    <!-- Subtle Smooth Cursor -->
-    <div class="cursor-dot" id="cursor-dot"></div>
-    <div class="cursor-ring" id="cursor-ring"></div>
-
     <!-- Minimalist Preloader -->
     <div id="preloader" class="preloader">
         <div class="loader-inner">
@@ -99,7 +95,7 @@
     <!-- Hero Section -->
     <section class="hero-section" id="home">
         <div class="container hero-grid">
-            <div class="hero-text-block">
+            <div class="hero-text-block reveal-left">
                 <div class="pill-label">
                     <span class="dot"></span> FORM. FUNCTION. FUTURE.
                 </div>
@@ -133,7 +129,7 @@
                 </div>
             </div>
 
-            <div class="hero-visual-block">
+            <div class="hero-visual-block reveal-right">
                 <div class="clean-hero-card">
                     <img src="images/hero.jpg" alt="AELEX Luxury Hardware Showcase" class="hero-main-img">
                     <div class="hero-card-tag">
@@ -151,24 +147,24 @@
     <!-- About Section -->
     <section class="about-section" id="about">
         <div class="container about-wrapper">
-            <div class="section-title-wrap text-center">
+            <div class="section-title-wrap text-center reveal-up">
                 <span class="subtitle">EXCELLENCE IN HARDWARE</span>
                 <h2 class="title">Crafted for <span class="highlight-serif">Inspired Spaces</span></h2>
                 <p class="description">Shreenathji Metal stands at the intersection of modern innovation and traditional brass craftsmanship in Jamnagar, Gujarat.</p>
             </div>
 
             <div class="about-cards-grid">
-                <div class="about-card">
+                <div class="about-card reveal-up" style="transition-delay: 0.1s;">
                     <div class="about-icon"><i class="fa-solid fa-gem"></i></div>
                     <h3>Extruded Brass Metallurgy</h3>
                     <p>Manufactured using virgin extruded brass rods for high tensile strength, zero porosity, and superior screw holding power.</p>
                 </div>
-                <div class="about-card">
+                <div class="about-card reveal-up" style="transition-delay: 0.2s;">
                     <div class="about-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
                     <h3>Vacuum PVD Coating</h3>
                     <p>In-house state-of-the-art PVD plating providing tarnish, scratch, and corrosion resistance for coastal and harsh environments.</p>
                 </div>
-                <div class="about-card">
+                <div class="about-card reveal-up" style="transition-delay: 0.3s;">
                     <div class="about-icon"><i class="fa-solid fa-sliders"></i></div>
                     <h3>Frictionless Operation</h3>
                     <p>Incorporating stainless steel ball bearings and precision knurls for silent, effortless door motion under heavy load capacities.</p>
@@ -180,7 +176,7 @@
     <!-- Interactive PVD Finish Studio Section -->
     <section class="finishes-section" id="finishes">
         <div class="container">
-            <div class="section-title-wrap text-center">
+            <div class="section-title-wrap text-center reveal-up">
                 <span class="subtitle">SURFACE SELECTION</span>
                 <h2 class="title">Exclusive <span class="highlight-serif">PVD Finishes</span> Studio</h2>
                 <p class="description">Select a signature surface coating below to preview live color variations and material properties.</p>
@@ -188,7 +184,7 @@
 
             <div class="studio-layout">
                 <!-- Swatch Palette -->
-                <div class="swatches-palette">
+                <div class="swatches-palette reveal-left">
                     <button class="swatch-card active" data-finish="gold-pvd" data-name="Gold PVD Finish" data-desc="24k high-gloss gold PVD coating with extreme wear and scratch resistance.">
                         <span class="swatch-circle swatch-gold"></span>
                         <span class="swatch-label">Gold PVD</span>
@@ -224,7 +220,7 @@
                 </div>
 
                 <!-- Preview Display -->
-                <div class="finish-display-card">
+                <div class="finish-display-card reveal-right">
                     <div class="display-stage">
                         <img src="images/hinge.jpg" alt="Hardware Finish Preview" id="finish-img" class="finish-rendered-img">
                     </div>
@@ -254,14 +250,14 @@
     <!-- Product Portfolio Section -->
     <section class="products-section" id="products">
         <div class="container">
-            <div class="section-title-wrap text-center">
+            <div class="section-title-wrap text-center reveal-up">
                 <span class="subtitle">OUR PORTFOLIO</span>
                 <h2 class="title">Architectural <span class="highlight-serif">Fittings Catalog</span></h2>
                 <p class="description">Browse our precision hardware categories. Click any item to inspect full size and technical specifications.</p>
             </div>
 
             <!-- Filter Buttons -->
-            <div class="portfolio-filter-bar">
+            <div class="portfolio-filter-bar reveal-up">
                 <button class="filter-tab active" data-filter="all">All Products</button>
                 <button class="filter-tab" data-filter="hinges">Brass Hinges</button>
                 <button class="filter-tab" data-filter="towerbolt">Brass Towerbolts</button>
@@ -272,7 +268,7 @@
             <div class="products-grid" id="products-grid">
 
                 <!-- Item 1 -->
-                <div class="product-item" data-category="hinges">
+                <div class="product-item reveal-up" data-category="hinges" style="transition-delay: 0.1s;">
                     <div class="product-img-box">
                         <span class="p-badge">Pure Brass</span>
                         <img src="images/hinge.jpg" alt="Brass Butt & Railway Hinges">
@@ -293,7 +289,7 @@
                 </div>
 
                 <!-- Item 2 -->
-                <div class="product-item" data-category="hinges">
+                <div class="product-item reveal-up" data-category="hinges" style="transition-delay: 0.2s;">
                     <div class="product-img-box">
                         <span class="p-badge">Heavy Duty</span>
                         <img src="images/hinge.jpg" alt="Brass Ryl Locking Hinges">
@@ -314,7 +310,7 @@
                 </div>
 
                 <!-- Item 3 -->
-                <div class="product-item" data-category="hinges">
+                <div class="product-item reveal-up" data-category="hinges" style="transition-delay: 0.3s;">
                     <div class="product-img-box">
                         <span class="p-badge">Frictionless</span>
                         <img src="images/hinge.jpg" alt="Brass Bearing Hinges">
@@ -335,7 +331,7 @@
                 </div>
 
                 <!-- Item 4 -->
-                <div class="product-item" data-category="towerbolt">
+                <div class="product-item reveal-up" data-category="towerbolt" style="transition-delay: 0.1s;">
                     <div class="product-img-box">
                         <span class="p-badge">Rose Gold PVD</span>
                         <img src="images/towerbolt.jpg" alt="Brass Tower Bolt Round & Hex">
@@ -356,7 +352,7 @@
                 </div>
 
                 <!-- Item 5 -->
-                <div class="product-item" data-category="towerbolt">
+                <div class="product-item reveal-up" data-category="towerbolt" style="transition-delay: 0.2s;">
                     <div class="product-img-box">
                         <span class="p-badge">Mataka & Cruz</span>
                         <img src="images/towerbolt.jpg" alt="Brass Tower Bolt Tapper">
@@ -377,7 +373,7 @@
                 </div>
 
                 <!-- Item 6 -->
-                <div class="product-item" data-category="steel">
+                <div class="product-item reveal-up" data-category="steel" style="transition-delay: 0.3s;">
                     <div class="product-img-box">
                         <span class="p-badge">Steel & Aluminium</span>
                         <img src="images/handle.jpg" alt="Steel Welded & Heavy Fittings">
@@ -424,7 +420,7 @@
     <!-- Clean Modern Luxury E-Brochure Section -->
     <section class="brochure-download-section">
         <div class="container">
-            <div class="brochure-clean-card">
+            <div class="brochure-clean-card reveal-up">
                 <div class="brochure-img-side">
                     <img src="images/hero.jpg" alt="AELEX Corporate Product Catalog" class="brochure-showcase-img">
                     <span class="brochure-tag-badge"><i class="fa-solid fa-file-pdf"></i> OFFICIAL E-CATALOG 2026</span>
@@ -450,14 +446,14 @@
     <!-- Contact & Inquiry Section -->
     <section class="contact-section" id="contact">
         <div class="container">
-            <div class="section-title-wrap text-center">
+            <div class="section-title-wrap text-center reveal-up">
                 <span class="subtitle">GET IN TOUCH</span>
                 <h2 class="title">Connect With <span class="highlight-serif">Shreenathji Metal</span></h2>
                 <p class="description">Direct manufacturing inquiries, bulk trade pricing, and architectural distribution support.</p>
             </div>
 
             <div class="contact-grid-container">
-                <div class="contact-card-info">
+                <div class="contact-card-info reveal-left">
                     <div class="c-info-item">
                         <i class="fa-solid fa-location-dot"></i>
                         <div>
@@ -481,7 +477,7 @@
                     </div>
                 </div>
 
-                <div class="contact-card-form">
+                <div class="contact-card-form reveal-right">
                     <form class="clean-form" onsubmit="submitContactForm(event)">
                         <h3>Request Pricing / Quotation</h3>
                         <div class="form-grid">

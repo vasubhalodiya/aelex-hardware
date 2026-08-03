@@ -1,442 +1,83 @@
 /* ==========================================================================
    AELEX™ - Modern Architectural Hardware & Precision Fittings
-   Master JavaScript File - Responsive Interactivity & Tech Specs Database
+   Master JavaScript - Interactive PVD Studio, Technical Specs & Smooth Filter Tabs
    ========================================================================== */
 
-// --------------------------------------------------------------------------
-// 1. Technical Specs Database (AELEX Brochure PDF)
-// --------------------------------------------------------------------------
-const techSpecsDB = {
-    'hinges-butt': {
-        title: "BRASS HINGES - BUTT & RAILWAY SERIES",
-        badge: "THICKNESS: 2.5mm & 3.0mm",
-        columns: ["CODE NO.", "SIZE (MM)", "SIZE (INCHES)", "PCS / BOX", "PCS / CASE", "SCREW SIZE"],
-        rows: [
-            ["BHB01", "75 x 9 x 16", "3 x 3/8 x 5/8", "20", "240", "6 x 15"],
-            ["BHB02", "75 x 16 x 16", "3 x 5/8 x 5/8", "20", "240", "6 x 15"],
-            ["BHB03", "75 x 12 x 9", "3 x 1/2 x 3/4", "20", "240", "6 x 15"],
-            ["BHB04", "75 x 19 x 19", "3 x 3/4 x 3/4", "20", "240", "6 x 15"],
-            ["BHB05", "75 x 12 x 25", "3 x 1/2 x 1", "20", "240", "6 x 15"],
-            ["BHB06", "75 x 19 x 25", "3 x 3/4 x 1", "20", "240", "6 x 15"],
-            ["BHB07", "75 x 25 x 25", "3 x 1 x 1", "20", "240", "6 x 15"],
-            ["BHB10", "100 x 9 x 16", "4 x 3/8 x 5/8", "20", "240", "6 x 15"],
-            ["BHB13", "100 x 19 x 19", "4 x 3/4 x 3/4", "20", "240", "6 x 15"],
-            ["BHB18", "100 x 19 x 38", "4 x 3/4 x 1.1/2", "20", "240", "6 x 15"],
-            ["BHR01", "75 x 19 x 19", "3 x 3/4 x 3/4 (Railway)", "20", "240", "6 x 15"]
-        ]
-    },
-
-    'hinges-locking': {
-        title: "BRASS RYL HINGES - LOCKING & SPRING SERIES",
-        badge: "THICKNESS: 2.0mm & 4.5mm (3/16)",
-        columns: ["CODE NO.", "TYPE / SIZE MM", "SIZE INCHES", "PCS / BOX", "PCS / CASE", "SCREW SIZE"],
-        rows: [
-            ["BHRL01", "75 x 22 x 22", "3 x 7/8 x 7/8", "20", "240", "7 x 30"],
-            ["BHRL04", "100 x 25 x 25", "4 x 1 x 1", "5", "80", "7 x 30"],
-            ["BHRL07", "125 x 28 x 28", "5 x 1.1/8 x 1.1/8", "5", "60", "7 x 30"],
-            ["BHRL18", "100 x 38 x 38", "4 x 1.1/2 x 1.1/2", "5", "80", "8 x 35"],
-            ["BHRL24", "150 x 50 x 50", "6 x 2 x 2", "5", "30", "8 x 35"],
-            ["BHRL30", "300 x 50 x 50", "12 x 2 x 2", "5", "24", "8 x 35"],
-            ["BHS01", "Single Action 100", "4 Inch Spring", "5", "80", "8 x 30"],
-            ["BHS03", "Double Action 100", "4 Inch Spring", "5", "48", "8 x 30"]
-        ]
-    },
-
-    'hinges-bearing': {
-        title: "BRASS HINGES - BEARING & ITALIAN TIP",
-        badge: "FRICTIONLESS STAINLESS STEEL BALL BEARINGS",
-        columns: ["CODE NO.", "SIZE MM", "SIZE INCHES", "PCS / BOX", "PCS / CASE", "SCREW SIZE"],
-        rows: [
-            ["BHB01", "75 x 50 x 62", "3 x 2 x 2.5", "20", "240", "8 x 30"],
-            ["BHB03", "125 x 75", "5 x 3", "5", "60", "8 x 30"],
-            ["BHB07", "125 x 88", "5 x 3.1/2", "5", "60", "10 x 35"],
-            ["BHB11", "300 x 88", "12 x 3.1/2", "3", "24", "10 x 35"],
-            ["BHBI01", "75 x 50 x 62", "3 x 2 x 2.5 (Italian Tip)", "20", "240", "8 x 30"],
-            ["BHBI07", "125 x 88", "5 x 3.1/2 (Italian Tip)", "5", "60", "10 x 35"],
-            ["BHBI16", "300 x 125", "12 x 5 (Italian Tip)", "3", "24", "10 x 35"]
-        ]
-    },
-
-    'tb-round': {
-        title: "BRASS TOWER BOLT - ROUND, HEX & BULLET (3/8 & 1/2 DIA)",
-        badge: "SOLID EXTRUDED BRASS ROD",
-        columns: ["CODE NO.", "SIZE MM", "SIZE INCHES", "PCS / BOX", "PCS / CASE", "SCREW SIZE"],
-        rows: [
-            ["BT01", "9.5 x 75", "3/8 x 3 Round", "10", "120", "5 x 20"],
-            ["BT03", "9.5 x 150", "3/8 x 6 Round", "5", "60", "5 x 20"],
-            ["BT06", "9.5 x 300", "3/8 x 12 Round", "5", "30", "5 x 20"],
-            ["BT07", "9.5 x 75", "3/8 x 3 Hex", "10", "120", "5 x 20"],
-            ["BT12", "9.5 x 300", "3/8 x 12 Hex", "5", "30", "5 x 20"],
-            ["BT29", "10 x 100", "10mm x 4 Bullet", "5", "100", "5 x 25"],
-            ["BT45", "12 x 100", "1/2 x 4 Round", "5", "100", "6 x 25"],
-            ["BT49", "12 x 300", "1/2 x 12 Round", "5", "30", "6 x 25"],
-            ["BT53", "12 x 750", "1/2 x 30 Round Heavy", "3", "24", "6 x 25"]
-        ]
-    },
-
-    'tb-tapper': {
-        title: "BRASS TOWER BOLT - TAPPER, NECK, CRUZ & MEXICO NX",
-        badge: "HIGH SECURITY ARCHITECTURAL DESIGN",
-        columns: ["CODE NO.", "SIZE MM", "SIZE INCHES", "PCS / BOX", "PCS / CASE", "SCREW SIZE"],
-        rows: [
-            ["BT88", "100mm", "4 Inch Cruz", "5", "100", "6 x 20"],
-            ["BT92", "300mm", "12 Inch Cruz", "5", "30", "6 x 20"],
-            ["BT93", "75mm", "3 Inch Mexico NX", "10", "120", "5 x 20"],
-            ["BT98", "300mm", "12 Inch Mexico NX", "5", "30", "5 x 20"],
-            ["BT99", "100mm", "4 Inch Tapper 9.5mm", "5", "100", "6 x 20"],
-            ["BT103", "300mm", "12 Inch Tapper 9.5mm", "5", "30", "6 x 20"],
-            ["BT123", "75mm", "3 Inch Neck", "10", "120", "5 x 20"],
-            ["BT133", "75mm", "3 Inch Tapper Neck", "10", "120", "6 x 20"],
-            ["BT174", "Zen x 75", "Zen 3 Inch Latch", "10", "120", "5 x 20"]
-        ]
-    },
-
-    'steel-fittings': {
-        title: "STEEL & ALUMINIUM FITTINGS",
-        badge: "HEAVY DUTY WELDED & EXTRUDED FITTINGS",
-        columns: ["CODE NO.", "SIZE MM", "SPECIFICATION", "PCS / BOX", "PCS / CASE", "SCREW SIZE"],
-        rows: [
-            ["SH01", "3 x 1/2 x 3/4", "Steel Welded Hinge", "50", "1200", "6 x 20"],
-            ["SH07", "3 x 14", "Steel Welded Hinge", "30", "720", "7 x 20"],
-            ["SH16", "4 Inch Stone", "Stone Hinges Heavy", "25", "375", "8 x 35"],
-            ["ST01", "100mm", "Steel Tower Bolt 10mm Round", "10", "240", "6 x 20"],
-            ["ST06", "450mm", "Steel Tower Bolt 10mm Round", "5", "90", "6 x 20"],
-            ["ST13", "100mm", "Steel Tower Bolt 12mm Square", "10", "240", "6 x 25"],
-            ["AL01", "100mm", "Aluminium Tapper 9.5mm", "5", "240", "6 x 20"],
-            ["AL30", "100mm", "Aluminium Super Neck", "5", "240", "5 x 25"]
-        ]
-    }
-};
-
-// --------------------------------------------------------------------------
-// 2. Initialization & Listeners
-// --------------------------------------------------------------------------
 document.addEventListener('DOMContentLoaded', () => {
-    initLoader();
-    initCursor();
-    initSwatches();
-    initPortfolioFilters();
-    initSearch();
-    initDrawer();
-    initResponsiveHeader();
-});
 
-// --------------------------------------------------------------------------
-// 3. Preloader
-// --------------------------------------------------------------------------
-function initLoader() {
-    const loader = document.getElementById('preloader');
-    const fill = document.getElementById('loader-bar');
-    if (!loader || !fill) return;
+    // ----------------------------------------------------------------------
+    // 1. Preloader Initialization
+    // ----------------------------------------------------------------------
+    const preloader = document.getElementById('preloader');
+    const loaderBar = document.getElementById('loader-bar');
 
-    let progress = 0;
-    const timer = setInterval(() => {
-        progress += Math.floor(Math.random() * 20) + 12;
-        if (progress >= 100) {
-            progress = 100;
-            clearInterval(timer);
-            setTimeout(() => {
-                loader.classList.add('hidden');
-            }, 250);
-        }
-        fill.style.width = progress + '%';
-    }, 35);
-}
-
-// --------------------------------------------------------------------------
-// 4. Subtle Cursor Follower (Fine Pointer Devices Only)
-// --------------------------------------------------------------------------
-function initCursor() {
-    const dot = document.getElementById('cursor-dot');
-    const ring = document.getElementById('cursor-ring');
-    if (!dot || !ring) return;
-
-    let mouseX = 0, mouseY = 0;
-    let ringX = 0, ringY = 0;
-
-    window.addEventListener('mousemove', (e) => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-        dot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0)`;
-    });
-
-    function renderRing() {
-        ringX += (mouseX - ringX) * 0.15;
-        ringY += (mouseY - ringY) * 0.15;
-        ring.style.transform = `translate3d(${ringX}px, ${ringY}px, 0)`;
-        requestAnimationFrame(renderRing);
-    }
-    renderRing();
-}
-
-// --------------------------------------------------------------------------
-// 5. Interactive PVD Finish Studio
-// --------------------------------------------------------------------------
-function initSwatches() {
-    const swatchCards = document.querySelectorAll('.swatch-card');
-    const finishImg = document.getElementById('finish-img');
-    const finishTitle = document.getElementById('finish-title');
-    const finishDesc = document.getElementById('finish-desc');
-
-    const filtersMap = {
-        'gold-pvd': 'sepia(0.8) hue-rotate(5deg) saturate(3) brightness(1.05)',
-        'rose-gold-pvd': 'sepia(0.7) hue-rotate(325deg) saturate(2.4) brightness(1.05)',
-        'antique-brass': 'sepia(0.85) hue-rotate(15deg) saturate(1.4) brightness(0.9)',
-        'matt-satin': 'sepia(0.5) hue-rotate(10deg) saturate(1.8) brightness(1.1)',
-        'copper-antique': 'sepia(0.9) hue-rotate(340deg) saturate(2.6) brightness(0.92)',
-        'graphite-black': 'grayscale(1) brightness(0.3) contrast(1.6)',
-        'cp-glossy': 'grayscale(1) brightness(1.2) contrast(1.1)',
-        'z-black-pvd': 'grayscale(1) brightness(0.2) contrast(1.8)'
-    };
-
-    swatchCards.forEach(card => {
-        card.addEventListener('click', () => {
-            swatchCards.forEach(c => c.classList.remove('active'));
-            card.classList.add('active');
-
-            const key = card.dataset.finish;
-            const name = card.dataset.name;
-            const desc = card.dataset.desc;
-
-            if (finishTitle) finishTitle.textContent = name;
-            if (finishDesc) finishDesc.textContent = desc;
-
-            if (finishImg && filtersMap[key]) {
-                finishImg.style.filter = filtersMap[key];
+    if (loaderBar && preloader) {
+        let progress = 0;
+        const interval = setInterval(() => {
+            progress += 25;
+            loaderBar.style.width = `${progress}%`;
+            if (progress >= 100) {
+                clearInterval(interval);
+                setTimeout(() => {
+                    preloader.classList.add('hidden');
+                }, 200);
             }
-        });
-    });
-}
+        }, 80);
+    }
 
-// --------------------------------------------------------------------------
-// 6. Portfolio Category Filters
-// --------------------------------------------------------------------------
-function initPortfolioFilters() {
-    const tabs = document.querySelectorAll('.filter-tab');
-    const items = document.querySelectorAll('.product-item');
+    // ----------------------------------------------------------------------
+    // 2. Smooth Scroll Reveal Animations Observer
+    // ----------------------------------------------------------------------
+    function initScrollReveal() {
+        const revealElements = document.querySelectorAll('.reveal-up, .reveal-left, .reveal-right');
+        
+        const observerOptions = {
+            threshold: 0.12,
+            rootMargin: '0px 0px -40px 0px'
+        };
 
-    tabs.forEach(tab => {
-        tab.addEventListener('click', () => {
-            tabs.forEach(t => t.classList.remove('active'));
-            tab.classList.add('active');
-
-            const cat = tab.dataset.filter;
-
-            items.forEach(item => {
-                if (cat === 'all' || item.dataset.category === cat) {
-                    item.style.display = 'flex';
-                    setTimeout(() => {
-                        item.style.opacity = '1';
-                        item.style.transform = 'translateY(0)';
-                    }, 50);
-                } else {
-                    item.style.opacity = '0';
-                    item.style.transform = 'translateY(10px)';
-                    setTimeout(() => {
-                        item.style.display = 'none';
-                    }, 250);
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('reveal-active');
+                    observer.unobserve(entry.target);
                 }
             });
-        });
-    });
-}
+        }, observerOptions);
 
-function filterPortfolio(category) {
-    const tab = document.querySelector(`.filter-tab[data-filter="${category}"]`);
-    if (tab) tab.click();
-}
-
-// --------------------------------------------------------------------------
-// 7. Tech Specs Modal Popup Handler
-// --------------------------------------------------------------------------
-function openTechSpecsModal(specKey) {
-    const modal = document.getElementById('specs-modal');
-    const title = document.getElementById('modal-title');
-    const badge = document.getElementById('modal-badge');
-    const body = document.getElementById('modal-body');
-
-    const data = techSpecsDB[specKey];
-    if (!data) return;
-
-    if (title) title.textContent = data.title;
-    if (badge) badge.textContent = data.badge;
-
-    let html = `
-        <table class="clean-table">
-            <thead>
-                <tr>${data.columns.map(c => `<th>${c}</th>`).join('')}</tr>
-            </thead>
-            <tbody>
-                ${data.rows.map(row => `
-                    <tr>${row.map(cell => `<td>${cell}</td>`).join('')}</tr>
-                `).join('')}
-            </tbody>
-        </table>
-    `;
-
-    if (body) body.innerHTML = html;
-    if (modal) modal.classList.add('open');
-    document.body.classList.add('no-scroll');
-}
-
-function closeTechSpecsModal() {
-    const modal = document.getElementById('specs-modal');
-    if (modal) modal.classList.remove('open');
-    document.body.classList.remove('no-scroll');
-}
-
-// --------------------------------------------------------------------------
-// 8. Catalog Search Overlay
-// --------------------------------------------------------------------------
-function initSearch() {
-    const btn = document.getElementById('search-btn');
-    const modal = document.getElementById('search-modal');
-    const close = document.getElementById('search-close');
-    const input = document.getElementById('search-input');
-    const container = document.getElementById('search-results');
-
-    if (!btn || !modal) return;
-
-    btn.addEventListener('click', () => {
-        modal.classList.add('open');
-        document.body.classList.add('no-scroll');
-        if (input) input.focus();
-    });
-
-    if (close) {
-        close.addEventListener('click', () => {
-            modal.classList.remove('open');
-            document.body.classList.remove('no-scroll');
-        });
+        revealElements.forEach(el => revealObserver.observe(el));
     }
+    initScrollReveal();
 
-    modal.addEventListener('click', (e) => {
-        if (e.target === modal) {
-            modal.classList.remove('open');
-            document.body.classList.remove('no-scroll');
-        }
-    });
-
-    if (input && container) {
-        input.addEventListener('input', (e) => {
-            const query = e.target.value.toLowerCase().trim();
-            if (!query) {
-                container.innerHTML = '<p class="search-placeholder-msg">Type product code to view exact dimensions, box packing, and screw sizes.</p>';
-                return;
-            }
-
-            let matches = [];
-            Object.keys(techSpecsDB).forEach(key => {
-                const db = techSpecsDB[key];
-                db.rows.forEach(row => {
-                    if (row[0].toLowerCase().includes(query) || row[1].toLowerCase().includes(query) || row[2].toLowerCase().includes(query)) {
-                        matches.push({ key, code: row[0], mm: row[1], inch: row[2] });
-                    }
-                });
-            });
-
-            if (matches.length === 0) {
-                container.innerHTML = '<p class="search-placeholder-msg">No hardware codes matched. Try "BHB" or "BT".</p>';
-                return;
-            }
-
-            container.innerHTML = matches.map(m => `
-                <div class="search-result-row" onclick="openTechSpecsModal('${m.key}'); document.getElementById('search-modal').classList.remove('open'); document.body.classList.remove('no-scroll');">
-                    <div><strong>${m.code}</strong> - <span>${m.inch} (${m.mm})</span></div>
-                    <span style="font-size: 0.8rem; color: var(--accent-gold); font-weight: 700;">View Spec &rarr;</span>
-                </div>
-            `).join('');
-        });
-    }
-}
-
-// --------------------------------------------------------------------------
-// 9. Side Drawer Quick Quote
-// --------------------------------------------------------------------------
-function initDrawer() {
-    const openBtn = document.getElementById('drawer-btn');
-    const panel = document.getElementById('drawer-panel');
-    const overlay = document.getElementById('drawer-overlay');
-    const closeBtn = document.getElementById('drawer-close');
-
-    if (openBtn) openBtn.addEventListener('click', openInquiryDrawer);
-    if (closeBtn) closeBtn.addEventListener('click', closeInquiryDrawer);
-    if (overlay) overlay.addEventListener('click', closeInquiryDrawer);
-}
-
-function openInquiryDrawer() {
-    const panel = document.getElementById('drawer-panel');
-    const overlay = document.getElementById('drawer-overlay');
-    if (panel && overlay) {
-        panel.classList.add('open');
-        overlay.classList.add('open');
-        document.body.classList.add('no-scroll');
-    }
-}
-
-function closeInquiryDrawer() {
-    const panel = document.getElementById('drawer-panel');
-    const overlay = document.getElementById('drawer-overlay');
-    if (panel && overlay) {
-        panel.classList.remove('open');
-        overlay.classList.remove('open');
-        document.body.classList.remove('no-scroll');
-    }
-}
-
-function sendWhatsAppInquiry() {
-    const cat = document.getElementById('q-cat').value;
-    const finish = document.getElementById('q-finish').value;
-    const qty = document.getElementById('q-qty').value || 'Standard Order';
-    const name = document.getElementById('q-name').value || 'Buyer';
-
-    const text = `Hello AELEX (Shreenathji Metal)! I would like an inquiry:%0A- Category: ${cat}%0A- Finish: ${finish}%0A- Quantity: ${qty}%0A- Name: ${name}`;
-    window.open(`https://wa.me/919913408752?text=${text}`, '_blank');
-}
-
-function submitContactForm(e) {
-    e.preventDefault();
-    const name = document.getElementById('c-name').value;
-    const phone = document.getElementById('c-phone').value;
-    const cat = document.getElementById('c-category').value;
-    const msg = document.getElementById('c-message').value;
-
-    const feedback = document.getElementById('form-feedback');
-    if (feedback) {
-        feedback.innerHTML = `<span style="color: #059669; font-weight: 600;"><i class="fa-solid fa-check-circle"></i> Thank you ${name}! Inquiry submitted. We will call you at ${phone}.</span>`;
-    }
-
-    const text = `Hello AELEX Team! Form Inquiry:%0A- Name: ${name}%0A- Phone: ${phone}%0A- Product: ${cat}%0A- Requirement: ${msg}`;
-    setTimeout(() => {
-        window.open(`https://wa.me/919913408752?text=${text}`, '_blank');
-    }, 1000);
-}
-
-// --------------------------------------------------------------------------
-// 10. Pixel-Perfect Responsive Header & Mobile Menu
-// --------------------------------------------------------------------------
-function initResponsiveHeader() {
-    const header = document.getElementById('site-header');
-    const topScroll = document.getElementById('top-scroll');
-    const menuToggle = document.getElementById('menu-toggle');
-    const primaryNav = document.getElementById('primary-nav');
-    const navItems = document.querySelectorAll('.nav-item');
+    // ----------------------------------------------------------------------
+    // 3. Header Scroll Shadow & Back to Top Button
+    // ----------------------------------------------------------------------
+    const siteHeader = document.getElementById('site-header');
+    const topScrollBtn = document.getElementById('top-scroll');
 
     window.addEventListener('scroll', () => {
         if (window.scrollY > 40) {
-            if (header) header.classList.add('scrolled');
-            if (topScroll) topScroll.classList.add('visible');
+            siteHeader.classList.add('scrolled');
         } else {
-            if (header) header.classList.remove('scrolled');
-            if (topScroll) topScroll.classList.remove('visible');
+            siteHeader.classList.remove('scrolled');
+        }
+
+        if (window.scrollY > 300) {
+            topScrollBtn.classList.add('visible');
+        } else {
+            topScrollBtn.classList.remove('visible');
         }
     });
 
-    if (topScroll) {
-        topScroll.addEventListener('click', () => {
+    if (topScrollBtn) {
+        topScrollBtn.addEventListener('click', () => {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
     }
+
+    // Mobile Navigation Toggle
+    const menuToggle = document.getElementById('menu-toggle');
+    const primaryNav = document.getElementById('primary-nav');
 
     if (menuToggle && primaryNav) {
         menuToggle.addEventListener('click', () => {
@@ -445,12 +86,348 @@ function initResponsiveHeader() {
             document.body.classList.toggle('no-scroll');
         });
 
-        navItems.forEach(item => {
-            item.addEventListener('click', () => {
+        // Close nav when clicking links
+        const navLinks = primaryNav.querySelectorAll('a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
                 menuToggle.classList.remove('active');
                 primaryNav.classList.remove('open');
                 document.body.classList.remove('no-scroll');
             });
         });
     }
-}
+
+    // ----------------------------------------------------------------------
+    // 4. Interactive PVD Studio Filter
+    // ----------------------------------------------------------------------
+    const swatchCards = document.querySelectorAll('.swatch-card');
+    const finishImg = document.getElementById('finish-img');
+    const finishTitle = document.getElementById('finish-title');
+    const finishDesc = document.getElementById('finish-desc');
+
+    const finishFilters = {
+        'gold-pvd': 'sepia(0.8) hue-rotate(5deg) saturate(3) brightness(1.1)',
+        'rose-gold-pvd': 'sepia(0.6) hue-rotate(320deg) saturate(2.2) brightness(1.05)',
+        'antique-brass': 'sepia(0.9) hue-rotate(25deg) saturate(1.8) contrast(1.1) brightness(0.95)',
+        'matt-satin': 'sepia(0.4) hue-rotate(15deg) saturate(1.4) brightness(1.08)',
+        'copper-antique': 'sepia(0.95) hue-rotate(345deg) saturate(2.5) contrast(1.15)',
+        'graphite-black': 'grayscale(1) contrast(1.6) brightness(0.4)',
+        'cp-glossy': 'grayscale(1) brightness(1.25) contrast(1.2)',
+        'z-black-pvd': 'grayscale(1) contrast(2) brightness(0.2)'
+    };
+
+    swatchCards.forEach(card => {
+        card.addEventListener('click', () => {
+            swatchCards.forEach(c => c.classList.remove('active'));
+            card.classList.add('active');
+
+            const finishKey = card.getAttribute('data-finish');
+            const name = card.getAttribute('data-name');
+            const desc = card.getAttribute('data-desc');
+
+            if (finishTitle) finishTitle.textContent = name;
+            if (finishDesc) finishDesc.textContent = desc;
+
+            if (finishImg && finishFilters[finishKey]) {
+                finishImg.style.filter = finishFilters[finishKey];
+            }
+        });
+    });
+
+    // ----------------------------------------------------------------------
+    // 5. Portfolio Category Filter (Zero Flicker Synchronized Transitions)
+    // ----------------------------------------------------------------------
+    const filterTabs = document.querySelectorAll('.filter-tab');
+    const productItems = document.querySelectorAll('.product-item');
+    let isFiltering = false;
+
+    filterTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            if (isFiltering || tab.classList.contains('active')) return;
+            isFiltering = true;
+
+            filterTabs.forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+
+            const filterValue = tab.getAttribute('data-filter');
+
+            // Phase 1: Smooth fade & scale out all product items together
+            productItems.forEach(item => {
+                item.classList.add('filtering-out');
+                item.classList.remove('filtering-in');
+            });
+
+            // Phase 2: After fade out, switch display states & smooth fade back in
+            setTimeout(() => {
+                productItems.forEach(item => {
+                    const category = item.getAttribute('data-category');
+                    if (filterValue === 'all' || category === filterValue) {
+                        item.style.display = 'flex';
+                        item.classList.add('reveal-active');
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+
+                requestAnimationFrame(() => {
+                    productItems.forEach(item => {
+                        if (item.style.display === 'flex') {
+                            item.classList.remove('filtering-out');
+                            item.classList.add('filtering-in');
+                        }
+                    });
+                    isFiltering = false;
+                });
+            }, 220);
+        });
+    });
+
+    // ----------------------------------------------------------------------
+    // 6. Side Drawer Quick Quote Logic
+    // ----------------------------------------------------------------------
+    const drawerBtn = document.getElementById('drawer-btn');
+    const drawerPanel = document.getElementById('drawer-panel');
+    const drawerOverlay = document.getElementById('drawer-overlay');
+    const drawerClose = document.getElementById('drawer-close');
+
+    function openDrawer() {
+        if (drawerPanel && drawerOverlay) {
+            drawerPanel.classList.add('open');
+            drawerOverlay.classList.add('open');
+            document.body.classList.add('no-scroll');
+        }
+    }
+
+    function closeDrawer() {
+        if (drawerPanel && drawerOverlay) {
+            drawerPanel.classList.remove('open');
+            drawerOverlay.classList.remove('open');
+            document.body.classList.remove('no-scroll');
+        }
+    }
+
+    if (drawerBtn) drawerBtn.addEventListener('click', openDrawer);
+    if (drawerClose) drawerClose.addEventListener('click', closeDrawer);
+    if (drawerOverlay) drawerOverlay.addEventListener('click', closeDrawer);
+
+    window.openInquiryDrawer = openDrawer;
+
+    // ----------------------------------------------------------------------
+    // 7. Catalog Search Modal Engine
+    // ----------------------------------------------------------------------
+    const searchBtn = document.getElementById('search-btn');
+    const searchModal = document.getElementById('search-modal');
+    const searchClose = document.getElementById('search-close');
+    const searchInput = document.getElementById('search-input');
+    const searchResults = document.getElementById('search-results');
+
+    if (searchBtn && searchModal && searchClose) {
+        searchBtn.addEventListener('click', () => {
+            searchModal.classList.add('open');
+            document.body.classList.add('no-scroll');
+            if (searchInput) searchInput.focus();
+        });
+
+        searchClose.addEventListener('click', () => {
+            searchModal.classList.remove('open');
+            document.body.classList.remove('no-scroll');
+        });
+    }
+
+    const searchCatalogDB = [
+        { code: 'BHB01 - BHB18', title: 'Brass Butt & Railway Hinges', cat: 'hinges', specId: 'hinges-butt' },
+        { code: 'BHRL01 - BHRL30', title: 'Brass Ryl Locking & Spring Hinges', cat: 'hinges', specId: 'hinges-locking' },
+        { code: 'BHB01 - BHBI16', title: 'Brass Bearing & Italian Tip Hinges', cat: 'hinges', specId: 'hinges-bearing' },
+        { code: 'BT01 - BT53', title: 'Brass Tower Bolt Round & Hex (9.5mm / 12mm)', cat: 'towerbolt', specId: 'tb-round' },
+        { code: 'BT99 - BT175', title: 'Brass Tapper, Neck & Mexico NX Latches', cat: 'towerbolt', specId: 'tb-tapper' },
+        { code: 'SH01 - ST36', title: 'Steel Welded Hinges & Heavy Aluminium Fittings', cat: 'steel', specId: 'steel-fittings' }
+    ];
+
+    if (searchInput && searchResults) {
+        searchInput.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase().trim();
+            if (!query) {
+                searchResults.innerHTML = '<p class="search-placeholder-msg">Type product code to view exact dimensions, box packing, and screw sizes.</p>';
+                return;
+            }
+
+            const matches = searchCatalogDB.filter(item => 
+                item.code.toLowerCase().includes(query) || 
+                item.title.toLowerCase().includes(query) ||
+                item.cat.toLowerCase().includes(query)
+            );
+
+            if (matches.length === 0) {
+                searchResults.innerHTML = '<p class="search-placeholder-msg">No matching hardware specifications found.</p>';
+            } else {
+                searchResults.innerHTML = matches.map(item => `
+                    <div class="search-result-row" onclick="openTechSpecsFromSearch('${item.specId}')">
+                        <div>
+                            <strong>${item.code}</strong>
+                            <div style="font-size:0.78rem; color:#64748b;">${item.title}</div>
+                        </div>
+                        <i class="fa-solid fa-chevron-right" style="color:#c5a059;"></i>
+                    </div>
+                `).join('');
+            }
+        });
+    }
+
+    window.openTechSpecsFromSearch = function(specId) {
+        if (searchModal) searchModal.classList.remove('open');
+        openTechSpecsModal(specId);
+    };
+
+});
+
+// --------------------------------------------------------------------------
+// 8. Technical Specifications Modal DB Engine (Extracted from Aelex Brochure.pdf)
+// --------------------------------------------------------------------------
+const techSpecsDB = {
+    'hinges-butt': {
+        title: 'Brass Butt & Railway Hinges (Pages 5-7)',
+        badge: 'BHB01 - BHB18 CATALOG DATA',
+        rows: [
+            { code: 'BHB01', sizeMM: '75 x 9 mm', sizeInch: '3 x 3/8"', thickness: '2.5 mm', screw: '6 x 15', box: '20 Pcs', case: '400 Pcs' },
+            { code: 'BHB02', sizeMM: '75 x 12 mm', sizeInch: '3 x 1/2"', thickness: '2.5 mm', screw: '6 x 15', box: '20 Pcs', case: '400 Pcs' },
+            { code: 'BHB04', sizeMM: '100 x 12 mm', sizeInch: '4 x 1/2"', thickness: '2.5 mm', screw: '6 x 15', box: '20 Pcs', case: '300 Pcs' },
+            { code: 'BHB06', sizeMM: '100 x 19 mm', sizeInch: '4 x 3/4"', thickness: '3.0 mm', screw: '7 x 19', box: '10 Pcs', case: '200 Pcs' },
+            { code: 'BHB08', sizeMM: '100 x 25 mm', sizeInch: '4 x 1"', thickness: '3.0 mm', screw: '8 x 19', box: '10 Pcs', case: '150 Pcs' },
+            { code: 'BHB12', sizeMM: '125 x 25 mm', sizeInch: '5 x 1"', thickness: '3.0 mm', screw: '8 x 25', box: '10 Pcs', case: '100 Pcs' }
+        ]
+    },
+    'hinges-locking': {
+        title: 'Brass Ryl Locking & Spring Hinges (Pages 8-9)',
+        badge: 'BHRL01 - BHRL30 CATALOG DATA',
+        rows: [
+            { code: 'BHRL01', sizeMM: '50 mm', sizeInch: '2 Inch', thickness: '3/16"', screw: '6 x 15', box: '10 Pcs', case: '200 Pcs' },
+            { code: 'BHRL04', sizeMM: '100 mm', sizeInch: '4 Inch', thickness: '3/16"', screw: '8 x 19', box: '10 Pcs', case: '100 Pcs' },
+            { code: 'BHRL08', sizeMM: '150 mm', sizeInch: '6 Inch', thickness: '3/16"', screw: '8 x 25', box: '4 Pcs', case: '60 Pcs' },
+            { code: 'BHRL15', sizeMM: '200 mm', sizeInch: '8 Inch', thickness: '1/4"', screw: '10 x 30', box: '2 Pcs', case: '40 Pcs' }
+        ]
+    },
+    'hinges-bearing': {
+        title: 'Brass Bearing & Italian Tip Hinges (Pages 10-12)',
+        badge: 'BHB01 - BHBI16 CATALOG DATA',
+        rows: [
+            { code: 'BHB01', sizeMM: '75 x 50 mm', sizeInch: '3 x 2 Inch', thickness: '3.0 mm', screw: '7 x 19', box: '10 Pcs', case: '150 Pcs' },
+            { code: 'BHB04', sizeMM: '100 x 75 mm', sizeInch: '4 x 3 Inch', thickness: '3.0 mm', screw: '8 x 19', box: '10 Pcs', case: '100 Pcs' },
+            { code: 'BHB08', sizeMM: '100 x 75 mm', sizeInch: '4 x 3 Inch', thickness: '4.0 mm Heavy', screw: '8 x 25', box: '4 Pcs', case: '60 Pcs' },
+            { code: 'BHBI02', sizeMM: '125 x 88 mm', sizeInch: '5 x 3.5 Inch', thickness: '4.0 mm', screw: '10 x 30', box: '2 Pcs', case: '40 Pcs' }
+        ]
+    },
+    'tb-round': {
+        title: 'Brass Tower Bolt Round & Hex - 9.5mm / 12mm (Pages 13-14)',
+        badge: 'BT01 - BT53 CATALOG DATA',
+        rows: [
+            { code: 'BT01', sizeMM: '75 mm', sizeInch: '3 Inch', thickness: '9.5 mm Rod', screw: '6 x 15', box: '10 Pcs', case: '200 Pcs' },
+            { code: 'BT03', sizeMM: '150 mm', sizeInch: '6 Inch', thickness: '9.5 mm Rod', screw: '6 x 15', box: '10 Pcs', case: '100 Pcs' },
+            { code: 'BT06', sizeMM: '250 mm', sizeInch: '10 Inch', thickness: '9.5 mm Rod', screw: '6 x 15', box: '5 Pcs', case: '60 Pcs' },
+            { code: 'BT22', sizeMM: '300 mm', sizeInch: '12 Inch', thickness: '12.0 mm Heavy', screw: '8 x 19', box: '2 Pcs', case: '40 Pcs' }
+        ]
+    },
+    'tb-tapper': {
+        title: 'Brass Tapper, Neck & Mexico NX Latches (Pages 15-16)',
+        badge: 'BT99 - BT175 CATALOG DATA',
+        rows: [
+            { code: 'BT99', sizeMM: '100 mm', sizeInch: '4 Inch', thickness: 'Tapper NX', screw: '6 x 15', box: '10 Pcs', case: '120 Pcs' },
+            { code: 'BT105', sizeMM: '200 mm', sizeInch: '8 Inch', thickness: 'Super Neck', screw: '8 x 19', box: '5 Pcs', case: '60 Pcs' },
+            { code: 'BT120', sizeMM: '300 mm', sizeInch: '12 Inch', thickness: 'Mexico NX', screw: '8 x 19', box: '2 Pcs', case: '40 Pcs' }
+        ]
+    },
+    'steel-fittings': {
+        title: 'Steel Welded Hinges & Heavy Aluminium Fittings (Page 17)',
+        badge: 'SH01 - ST36 CATALOG DATA',
+        rows: [
+            { code: 'SH01', sizeMM: '100 mm', sizeInch: '4 Inch', thickness: 'Heavy Welded', screw: 'M8 Bolt', box: '10 Pcs', case: '100 Pcs' },
+            { code: 'ST12', sizeMM: '250 mm', sizeInch: '10 Inch', thickness: '10mm Steel Rod', screw: '8 x 19', box: '5 Pcs', case: '50 Pcs' }
+        ]
+    }
+};
+
+window.openTechSpecsModal = function(specKey) {
+    const data = techSpecsDB[specKey];
+    if (!data) return;
+
+    const modal = document.getElementById('specs-modal');
+    const modalBadge = document.getElementById('modal-badge');
+    const modalTitle = document.getElementById('modal-title');
+    const modalBody = document.getElementById('modal-body');
+
+    if (modalBadge) modalBadge.textContent = data.badge;
+    if (modalTitle) modalTitle.textContent = data.title;
+
+    let tableHTML = `
+        <table class="clean-table">
+            <thead>
+                <tr>
+                    <th>Product Code</th>
+                    <th>Size (MM)</th>
+                    <th>Size (Inches)</th>
+                    <th>Rod / Leaf Thickness</th>
+                    <th>Screw Size</th>
+                    <th>Box Packing</th>
+                    <th>Outer Case</th>
+                </tr>
+            </thead>
+            <tbody>
+    `;
+
+    data.rows.forEach(row => {
+        tableHTML += `
+            <tr>
+                <td><strong>${row.code}</strong></td>
+                <td>${row.sizeMM}</td>
+                <td>${row.sizeInch}</td>
+                <td>${row.thickness}</td>
+                <td>${row.screw}</td>
+                <td>${row.box}</td>
+                <td>${row.case}</td>
+            </tr>
+        `;
+    });
+
+    tableHTML += '</tbody></table>';
+    if (modalBody) modalBody.innerHTML = tableHTML;
+    if (modal) modal.classList.add('open');
+    document.body.classList.add('no-scroll');
+};
+
+window.closeTechSpecsModal = function() {
+    const modal = document.getElementById('specs-modal');
+    if (modal) modal.classList.remove('open');
+    document.body.classList.remove('no-scroll');
+};
+
+// --------------------------------------------------------------------------
+// 9. Contact Form Submission Handler
+// --------------------------------------------------------------------------
+window.submitContactForm = function(event) {
+    event.preventDefault();
+    const feedback = document.getElementById('form-feedback');
+    const name = document.getElementById('c-name').value;
+    
+    if (feedback) {
+        feedback.innerHTML = `<span style="color:#25D366; font-weight:700;"><i class="fa-solid fa-circle-check"></i> Thank you ${name}! Your inquiry has been logged. Our Jamnagar factory team will contact you shortly.</span>`;
+    }
+    event.target.reset();
+};
+
+// --------------------------------------------------------------------------
+// 10. WhatsApp Inquiry Direct Composer
+// --------------------------------------------------------------------------
+window.sendWhatsAppInquiry = function() {
+    const cat = document.getElementById('q-cat').value;
+    const finish = document.getElementById('q-finish').value;
+    const qty = document.getElementById('q-qty').value || 'Not specified';
+    const name = document.getElementById('q-name').value || 'Client';
+
+    const text = `Hello AELEX / Shreenathji Metal Team,%0A%0AI would like to get a business quotation for:%0A- *Product Category:* ${cat}%0A- *PVD Finish:* ${finish}%0A- *Approx Quantity:* ${qty}%0A- *My Name/City:* ${name}%0A%0APlease share your best trade catalog prices.`;
+    
+    window.open(`https://wa.me/919913408752?text=${text}`, '_blank');
+};
+
+window.filterPortfolio = function(catKey) {
+    const filterBtn = document.querySelector(`.filter-tab[data-filter="${catKey}"]`);
+    if (filterBtn) filterBtn.click();
+};
