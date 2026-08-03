@@ -1,6 +1,6 @@
 /* ==========================================================================
    AELEX™ - Modern Architectural Hardware & Precision Fittings
-   Master Responsive CSS - Technical Specs Modal Perfection & Clean Alignment
+   Master Responsive CSS - Horizontal Scroll PVD Swatch Tabs & Studio Layout
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
@@ -690,7 +690,7 @@ img {
 }
 
 /* --------------------------------------------------------------------------
-   9. PVD Finish Studio Section
+   9. PVD Finish Studio Section & Horizontal Scroll Tabs
    -------------------------------------------------------------------------- */
 .finishes-section {
     padding: clamp(50px, 7vw, 90px) 0;
@@ -711,8 +711,8 @@ img {
 .swatch-card {
     background: #ffffff;
     border: 1px solid var(--border-light);
-    padding: 10px 12px;
-    border-radius: var(--radius-md);
+    padding: 10px 14px;
+    border-radius: 30px;
     display: flex;
     align-items: center;
     gap: 10px;
@@ -722,6 +722,15 @@ img {
 .swatch-card:hover, .swatch-card.active {
     border-color: var(--accent-gold);
     box-shadow: var(--shadow-md);
+    background: #ffffff;
+}
+.swatch-card.active {
+    background: #0f172a;
+    color: #ffffff;
+    border-color: #0f172a;
+}
+.swatch-card.active .swatch-label {
+    color: #ffffff;
 }
 .swatch-circle {
     width: 22px;
@@ -1542,7 +1551,6 @@ img {
 @media (max-width: 1024px) {
     .hero-grid { grid-template-columns: 1fr; }
     .hero-visual-block { max-width: 500px; margin: 0 auto; width: 100%; }
-    .studio-layout { grid-template-columns: 1fr; }
     .contact-grid-container { grid-template-columns: 1fr; }
 }
 
@@ -1576,6 +1584,35 @@ img {
     
     .footer-content { grid-template-columns: 1fr; gap: 20px; }
     .brochure-clean-card { grid-template-columns: 1fr; }
+
+    /* PVD Studio Responsive Horizontal Scroll Tabs */
+    .studio-layout {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    .swatches-palette {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding: 6px 4px 12px;
+        gap: 10px;
+        -webkit-overflow-scrolling: touch;
+        scroll-snap-type: x mandatory;
+    }
+    .swatches-palette::-webkit-scrollbar {
+        height: 4px;
+    }
+    .swatches-palette::-webkit-scrollbar-thumb {
+        background: var(--accent-gold);
+        border-radius: 4px;
+    }
+    .swatch-card {
+        flex: 0 0 auto;
+        white-space: nowrap;
+        scroll-snap-align: start;
+        padding: 8px 16px;
+        border-radius: 30px;
+    }
 }
 
 @media (max-width: 768px) {
@@ -1632,7 +1669,6 @@ img {
     
     .primary-cta-btn { padding: 6px 12px; font-size: 0.78rem; }
     
-    .swatches-palette { grid-template-columns: 1fr; }
     .form-grid { grid-template-columns: 1fr; }
     
     .hero-btn-group { flex-direction: column; width: 100%; }
