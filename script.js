@@ -1,5 +1,5 @@
 /* ==========================================================================
-   AELEX™ - Modern Architectural Hardware & Precision Fittings
+   DEMO - Modern Architectural Hardware & Precision Fittings (Sample Template)
    Master JavaScript - Interactive PVD Studio, Technical Specs & Smooth Filter Tabs
    ========================================================================== */
 
@@ -281,7 +281,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // --------------------------------------------------------------------------
-// 8. Technical Specifications Modal DB Engine (Extracted from Aelex Brochure.pdf)
+// 8. Technical Specifications Modal DB Engine (Sample Demo Data)
 // --------------------------------------------------------------------------
 const techSpecsDB = {
     'hinges-butt': {
@@ -408,7 +408,7 @@ window.submitContactForm = function(event) {
     const name = document.getElementById('c-name').value;
     
     if (feedback) {
-        feedback.innerHTML = `<span style="color:#25D366; font-weight:700;"><i class="fa-solid fa-circle-check"></i> Thank you ${name}! Your inquiry has been logged. Our Jamnagar factory team will contact you shortly.</span>`;
+        feedback.innerHTML = `<span style="color:#25D366; font-weight:700;"><i class="fa-solid fa-circle-check"></i> Thank you ${name}! Your inquiry has been logged. Our factory team will contact you shortly.</span>`;
     }
     event.target.reset();
 };
@@ -422,9 +422,9 @@ window.sendWhatsAppInquiry = function() {
     const qty = document.getElementById('q-qty').value || 'Not specified';
     const name = document.getElementById('q-name').value || 'Client';
 
-    const text = `Hello AELEX / Shreenathji Metal Team,%0A%0AI would like to get a business quotation for:%0A- *Product Category:* ${cat}%0A- *PVD Finish:* ${finish}%0A- *Approx Quantity:* ${qty}%0A- *My Name/City:* ${name}%0A%0APlease share your best trade catalog prices.`;
+    const text = `Hello Demo Team,%0A%0AI would like to get a business quotation for:%0A- *Product Category:* ${cat}%0A- *PVD Finish:* ${finish}%0A- *Approx Quantity:* ${qty}%0A- *My Name/City:* ${name}%0A%0APlease share your best trade catalog prices.`;
     
-    window.open(`https://wa.me/919913408752?text=${text}`, '_blank');
+    window.open(`https://wa.me/911234567890?text=${text}`, '_blank');
 };
 
 window.filterPortfolio = function(catKey) {
